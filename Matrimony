@@ -1,0 +1,30 @@
+import java.util.Scanner;
+
+public class Matrimony {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter gender : ");
+        int gender = sc.nextInt();
+
+        System.out.println("Enter age: ");
+        int age = sc.nextInt();
+
+        if (gender == 1) {   // Male
+            if (age >= 21)
+                System.out.println("Eligible for marriage");
+            else
+                System.out.println("Not eligible for marriage");
+        }
+
+        if (gender == 2) {   // Female
+            if (age >= 18)
+                System.out.println("Eligible for marriage");
+            else
+                System.out.println("Not eligible for marriage");
+        }
+
+        sc.close();
+    }
+}

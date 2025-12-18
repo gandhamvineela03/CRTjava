@@ -1,0 +1,70 @@
+// Abstract class
+abstract class Vaccine {
+    int age;
+    String nationality;
+    boolean firstDoseCompleted = false;
+    
+    // Constructor
+    Vaccine(int age, String nationality)
+    {
+        this.age = age;
+        this.nationality = nationality;
+    }
+    // Concrete method - First Dose
+    void firstDose() 
+    {
+        if (nationality.equalsIgnoreCase("Indian") && age >= 18)
+        {
+            System.out.println("Your first dose successfully done. Now you have to Pay 250 Rs.");
+            firstDoseCompleted = true;
+        } 
+        else
+        {
+            System.out.println("You are not eligible for first dose.");
+        }
+    }
+    // Concrete method - Second Dose
+    void secondDose() 
+    {
+        if (firstDoseCompleted) 
+        {
+            System.out.println("Your second dose successfully done.");
+        } 
+        else 
+        {
+            System.out.println("Please complete first dose before second dose.");
+        }
+    }
+    // Abstract method
+    abstract void boosterDose();
+}
+
+class VaccinationSuccessful extends Vaccine
+{
+    VaccinationSuccessful(int age, String nationality) 
+    {
+        super(age, nationality);
+    }
+    void boosterDose() 
+    {
+        if (firstDoseCompleted) 
+        {
+            System.out.println("Your boosterDose successfully done.");
+        } 
+        else 
+        {
+            System.out.println("Booster dose not allowed without vaccination.");
+        }
+    }
+}
+public class AssignmentAbstractClass
+{
+    public static void main(String[] args) 
+    {
+        Vaccine v = new VaccinationSuccessful(18, "Indian");
+
+        v.firstDose();
+        v.secondDose();
+        v.boosterDose();
+    }
+}

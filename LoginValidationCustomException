@@ -1,0 +1,65 @@
+import java.util.Scanner;
+
+// Custom Exception
+class InvalidLoginException extends Exception {
+    public String getMessage() {
+        return "Invalid login credentials. Please try again!";
+    }
+}
+// Login class
+class Login {
+    String userId = "admin";
+    String password = "1234";
+
+    String uid, pwd;
+
+    void acceptInput() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Enter User ID:");
+        uid = s.next();
+        System.out.println("Enter Password:");
+        pwd = s.next();
+    }
+
+    void verify() throws InvalidLoginException {
+        if (userId.equals(uid) && password.equals(pwd)) {
+            System.out.println("Login successful!");
+        } else {
+            InvalidLoginException e = new InvalidLoginException();
+            System.out.println(e.getMessage());
+            throw e;
+        }
+    }
+}
+
+// Application class
+class Application {
+    void initiate() {
+        Login login = new Login();
+
+        try {
+            login.acceptInput();   // First attempt
+            login.verify();
+        } catch (Exception e1) {
+            try {
+                login.acceptInput();   // Second attempt
+                login.verify();
+            } catch (Exception e2) {
+                try {
+                    login.acceptInput();   // Third attempt
+                    login.verify();
+                } catch (Exception e3) {
+                    System.out.println("Account locked!");
+                    System.exit(0);
+                }
+            }
+        }
+    }
+}
+
+public class LoginValidation {
+    public static void main(String[] args) {
+        Application app = new Application();
+        app.initiate();
+    }
+}
